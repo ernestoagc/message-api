@@ -14,9 +14,9 @@ services:
       - fplusf
       
   message-app:
+    restart: on-failure
     container_name: message-app
-    build:
-      context: "./"
+    build: ./
     depends_on:
       - dbMessageTest
     expose:
