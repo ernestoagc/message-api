@@ -1,7 +1,7 @@
 FROM maven:3.6.3-jdk-11 AS builder
 WORKDIR /app
 RUN git clone https://github.com/ernestoagc/message-api.git
-RUN chmod -R 777 form-api
+RUN chmod -R 777 message-api
 COPY pom.xml .
 RUN mvn -e -B dependency:resolve
 COPY src ./src

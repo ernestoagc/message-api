@@ -41,4 +41,4 @@ Also you can find a postman colecction (FplusF) for test this web service
 
 
 #### **5. demo**
-I've deploy these application on heroku. You could test with this url: 
+I've deploy these application on heroku. if you want to test online replace: http://localhost:8600  to https://messageangular.herokuapp.com
