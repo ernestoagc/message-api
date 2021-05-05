@@ -8,32 +8,25 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: password123
       MYSQL_DATABASE: dbMessage
-      MYSQL_ROOT_HOST: '%'
-    volumes:
-      - ./sql:/docker-entrypoint-initdb.d
     ports:
-      - "3306:3306"      
-    healthcheck:
-      test: "/usr/bin/mysql --user=root --password=root--execute \"SHOW DATABASES;\""
-      interval: 2s
-      timeout: 20s
-      retries: 10
+      - "3306:3306"    
     networks:
       - fplusf
       
   message-app:
+    container_name: message-app
     build:
       context: "./"
     depends_on:
-      - dbMessageTest      
+      - dbMessageTest
     expose:
       - "8600"
     ports:
       - 8600:8600
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://dbMessageTest:3306/dbMessage?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: password123
+      spring.profiles.active: test 
+    links:
+      - dbMessageTest
     networks:
       - fplusf
 
