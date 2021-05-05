@@ -36,7 +36,7 @@ public class Constant {
 	
 	public static final class WORD	{
 		public final static String DOMAINCOM	= "domain.com";
-		public final static String SECURE	= "secure:";
+		public final static String SECURE	= "SECURE";
 		
 	}
 }
