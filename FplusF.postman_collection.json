@@ -1,0 +1,223 @@
+{
+	"info": {
+		"_postman_id": "93706f41-d93f-4336-8ae0-2036428cb423",
+		"name": "FplusF",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "send Message (file)",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json",
+						"disabled": true
+					},
+					{
+						"key": "charset",
+						"type": "text",
+						"value": "utf-8",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"contentType": "",
+							"description": "555",
+							"type": "file",
+							"src": "/C:/Users/Alonso/Documents/proyectos/postulacion/fplusf/data/132443500.txt"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8600/message/file",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8600",
+					"path": [
+						"message",
+						"file"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "send Message",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"to\": \"person@domain4.net,name@domain.net\",\r\n  \"from\": \"origin@somewhere.us\",\r\n  \"subject\": \"SECURE: Saying hi\",\r\n  \"body\": \",KO I kniht siht si a doog .nalp esaelP .deecorp ekaM erus uoy t'nod ekam yna  sekatsim )-: eeS ,ay\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8600/message/send",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8600",
+					"path": [
+						"message",
+						"send"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "send Message (reverse)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"to\": \"person@domain4.net,name@domain.net\",\r\n  \"from\": \"origin@somewhere.us\",\r\n  \"subject\": \"SECURE: Saying hi\",\r\n  \"body\": \",KO I kniht siht si a doog .nalp esaelP .deecorp ekaM erus uoy t'nod ekam yna  sekatsim )-: eeS ,ay\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8600/message/send",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8600",
+					"path": [
+						"message",
+						"send"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "send Message (reverse and replace) Body Trigger",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"to\": \"person@domain4.net,name@domain.net\",\r\n  \"from\": \"origin@somewhere.us\",\r\n  \"subject\": \"Saying hi\",\r\n  \"body\": \",KO I abcdefghijkssa siht si a doog .n$l$ esaelP .deeco&p ekaM erus uoy t'nod ekam yna  sekatsim )-: eeS ,ay\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8600/message/send",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8600",
+					"path": [
+						"message",
+						"send"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "send Message (replace)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"to\": \"person@domain4.net,name@domain.net\",\r\n  \"from\": \"origin@somewhere.us\",\r\n  \"subject\": \"SECURE: Saying hi\",\r\n  \"body\": \",KO I kniht siht si a doog .nalp esaelP .deecorp ekaM erus uoy t'nod ekam yna  sekatsim )-: eeS ,ay\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8600/message/send",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8600",
+					"path": [
+						"message",
+						"send"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listAll",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MTQyMDM1MzgsInVzZXJfbmFtZSI6ImFsb25zbyIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwianRpIjoiMTBhZjMyMjEtNmE3Zi00OTA4LWJiOTUtMzk5ZmI2YTMwZjhkIiwiY2xpZW50X2lkIjoiYW5ndWxhckFwcCIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdfQ.2jSJkqTV-4zA5pZKYyPHMlmgNU_Xv2xe4hlkAn9F5YU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8600/message/findall",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8600",
+					"path": [
+						"message",
+						"findall"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
