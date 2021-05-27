@@ -9,7 +9,7 @@ we are going to use 2 docker container for up the application. For that reason I
 
 
 #### **3. Executing Unit Test**
-I've Built for MessageController (MessageControllerTest.java) 5 unit test with Mockito..
+I've Built for MessageController (MessageControllerTest.java) 5 unit test with Mockito...
 
 ![](https://i.imgur.com/uAsPP9w.jpg)
 
