@@ -47,15 +47,7 @@ pipeline {
         			   withSonarQubeEnv("sonarqube-server") { 
         			   sh   "cd ${WORKSPACE}"
         			   echo "before --- 2"
-        			   sh "mvn sonar:sonar \
-        							-Dsonar.projectName=message-api \
-        							-Dsonar.projectKey=message-api \
-                                    -Dsonar.sources=src/main/ \
-                                    -Dsonar.sourceEncoding=UTF-8 \
-                                    -Dsonar.tests=src/test/ \
-                                    -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \
-                                    -Dsonar.host.url=http://12.0.130.85:9000"
-                                    
+        			   sh "mvn sonar:sonar "                                   
         				   }
                 }
             }
