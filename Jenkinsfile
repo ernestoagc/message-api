@@ -48,8 +48,8 @@ pipeline {
         			   sh   "cd ${WORKSPACE}"
         			   echo "before --- 2"
         			   sh "mvn sonar:sonar \
-        							-Dsonar.projectName=crud-api \
-        							-Dsonar.projectKey=crud-api \
+        							-Dsonar.projectName=message-api \
+        							-Dsonar.projectKey=message-api \
                                     -Dsonar.sources=src/main/ \
                                     -Dsonar.sourceEncoding=UTF-8 \
                                     -Dsonar.tests=src/test/ \
@@ -67,8 +67,8 @@ pipeline {
             script {
                 sh "pwd"
                 echo "Inicia Build" 
-                     sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${env.registry}'
-					sh 'docker build -t ${env.registry}/${repository_image}:${BUILD_NUMBER} .'
+                     sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${registry}'
+					sh 'docker build -t ${registry}/${repository_image}:${BUILD_NUMBER} .'
           
             }
           }
@@ -79,7 +79,7 @@ pipeline {
          steps{  
              script {
                       sh '''
-                      docker push ${env.registry}/${repository_image}:${BUILD_NUMBER}
+                      docker push ${registry}/${repository_image}:${BUILD_NUMBER}
                       '''
              }
             }
