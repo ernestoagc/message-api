@@ -47,9 +47,7 @@ pipeline {
         			   withSonarQubeEnv("sonarqube-server") { 
         			   sh   "cd ${WORKSPACE}"
         			   echo "before --- 2"
-        			   sh "mvn sonar:sonar \
-        							-Dproject.settings=sonar-project.properties "
-                                    
+        			   sh "mvn sonar:sonar"                                    
         				   }
                 }
             }
