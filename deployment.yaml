@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: onlock-api
+  name: onlock-api
+  namespace: onlock-test
+spec:
+  replicas: 1 #CHANGE
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: onlock-api
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: onlock-api
+    spec:
+      containers:
+      - image: 880382163732.dkr.ecr.us-east-1.amazonaws.com/onlock-api:tagVersion
+        imagePullPolicy: IfNotPresent
+        name: onlock-api
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 10

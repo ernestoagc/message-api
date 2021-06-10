@@ -5,8 +5,10 @@ pipeline {
         jdk 'Java'
     }
     environment {
-        registry = "880382163732.dkr.ecr.us-east-1.amazonaws.com"
-        repository_image="nshh"
+        ecr_registry = "880382163732.dkr.ecr.us-east-1.amazonaws.com"
+		ecr_cred ="us-east-1:ecr-jenkins"
+		k8s_host_remote ="ubuntu@12.0.133.16"
+        repository_image="onlock-api"
     }
 
     stages {
@@ -47,42 +49,51 @@ pipeline {
         			   withSonarQubeEnv("sonarqube-server") { 
         			   sh   "cd ${WORKSPACE}"
         			   echo "before --- 2"
-        			   sh "mvn sonar:sonar -Dproject.settings=../../sonar-project.properties"
+        			   sh "mvn sonar:sonar \
+        							-Dsonar.projectName=message-api \
+        							-Dsonar.projectKey=message-api \
+                                    -Dsonar.sources=src/main/ \
+                                    -Dsonar.sourceEncoding=UTF-8 \
+                                    -Dsonar.tests=src/test/ \
+                                    -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \
+                                    -Dsonar.host.url=http://12.0.130.85:9000"
                                     
         				   }
                 }
             }
-        }
-        
-        // Building Docker images
-        stage('Building image') {
-          steps{
-            script {
-                sh "pwd"
-                echo "Inicia Build" 
-                     sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${registry}'
-					sh 'docker build -t ${registry}/${repository_image}:${BUILD_NUMBER} .'
-          
-            }
-          }
-        }
-        
+        }        
+
         // Uploading Docker images into AWS ECR
-        stage('Pushing to ECR') {
+         stage('Pushing to ECR') {
          steps{  
              script {
-                      sh '''
-                      docker push ${registry}/${repository_image}:${BUILD_NUMBER}
-                      '''
+						docker.withRegistry(
+						"https://${ecr_registry}/${repository_image}",
+						"ecr:${ecr_cred}"){
+						def myImage = docker.build("${repository_image}")
+        				   myImage.push("${BUILD_NUMBER}")
+						}
              }
             }
-        }
-        
+         }
 		
 		
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+        stage ('K8S Deploy') {
+          steps{
+
+                script {     
+                    sh "pwd"
+                    echo "Updating image version in deployment file"
+                    sh "chmod +x changeTag.sh" 
+                    sh "./changeTag.sh ${BUILD_NUMBER}" 
+                }
+                
+                sshagent(['k8s-ubuntu']) {
+                    sh "scp -oStrictHostKeyChecking=no deployment-api.yaml ${k8s_host_remote}:/home/ubuntu/"
+                    echo "ejecuto bien remoto"
+                    sh "ssh ${k8s_host_remote} pwd"
+                    sh "ssh ${k8s_host_remote} kubectl apply -f deployment-api.yaml"
+                }
             }
         }
     }
