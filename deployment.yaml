@@ -22,7 +22,7 @@ spec:
         app: onlock-api
     spec:
       containers:
-      - image: 880382163732.dkr.ecr.us-east-1.amazonaws.com/onlock-api:tagVersion
+      - image: 880382163732.dkr.ecr.us-east-1.amazonaws.com/onlock-api:tagVersion #CHANGE
         imagePullPolicy: IfNotPresent
         name: onlock-api
       restartPolicy: Always

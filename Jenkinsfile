@@ -85,7 +85,8 @@ pipeline {
                     sh "pwd"
                     echo "Updating image version in deployment file"
                     sh "chmod +x changeTag.sh" 
-                    sh "./changeTag.sh ${BUILD_NUMBER}" 
+                    sh "./changeTag.sh ${BUILD_NUMBER}"                     
+                    echo "Rename deployment file"
                 }
                 
                 sshagent(['k8s-ubuntu']) {
