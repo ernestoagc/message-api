@@ -22,8 +22,28 @@ spec:
         app: onlock-api
     spec:
       containers:
-      - image: 880382163732.dkr.ecr.us-east-1.amazonaws.com/onlock-api:tagVersion #CHANGE
+      - image: 880382163732.dkr.ecr.us-east-1.amazonaws.com/onlock-api:tagVersion
         imagePullPolicy: IfNotPresent
         name: onlock-api
+   #     ports:
+    #    - containerPort: 18082
+        env:
+          - name: spring.profiles.active
+            value: test          
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              configMapKeyRef:
+                name: onlock-parameters
+                key: MYSQL_PASSWORD
+          - name: MYSQL_USER
+            valueFrom:
+              configMapKeyRef:
+                name: onlock-parameters
+                key: MYSQL_USER
+          - name: MYSQL_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: onlock-parameters
+                key: MYSQL_HOST
       restartPolicy: Always
       terminationGracePeriodSeconds: 10
