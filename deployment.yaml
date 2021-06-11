@@ -25,8 +25,8 @@ spec:
       - image: 880382163732.dkr.ecr.us-east-1.amazonaws.com/onlock-api:tagVersion
         imagePullPolicy: IfNotPresent
         name: onlock-api
-   #     ports:
-    #    - containerPort: 18082
+        ports:
+        - containerPort: 8600
         env:
           - name: spring.profiles.active
             value: test            
