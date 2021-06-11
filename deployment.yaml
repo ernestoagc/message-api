@@ -27,9 +27,7 @@ spec:
         name: onlock-api
    #     ports:
     #    - containerPort: 18082
-        env:
-          - name: spring.profiles.active
-            value: test          
+        env:        
           - name: MYSQL_PASSWORD
             valueFrom:
               configMapKeyRef:
